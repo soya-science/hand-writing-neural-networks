@@ -31,6 +31,7 @@ Here *zero-shot* means that no real face image was used to set any weight. It is
 - [Experiment 2: ResNet-50 and a hand-typed head](#experiment-2--resnet-50-and-a-hand-typed-head)
 - [Experiment 3: ten pictures per class](#experiment-3--ten-pictures-per-class)
 - [Findings](#findings)
+- [Classification reports](#classification-reports)
 - [Caveats](#caveats)
 - [Reproducing](#reproducing)
 - [Repository layout](#repository-layout)
@@ -193,7 +194,7 @@ The last row shows the main failure. Most shots I labelled "lip corners down" ha
 
 **3. Ten real images per class are worth more than all the cartoon engineering.** Going from 0 to 70 real images moved balanced accuracy from about 19% to 34%. The cartoon probing in experiment 2 hand-picked a few channels with care. The few-shot detectors simply used real images, and that mattered more.
 
-**4. A hand-designed head matches the automatic one but doesn't beat it.** The few-shot head (34.3%) and weight imprinting (33.0%) differ by less than their noise of about ±2 points. They do succeed in different places:
+**4. A hand-designed head matches the automatic one but doesn't beat it.** The few-shot head (34.3%) and weight imprinting (33.0%) differ by less than their noise of about ±2 points. By macro F1 the reference is slightly ahead (0.25 against 0.22), because the hand-made head over-predicts disgust and fear. The two succeed in different places:
 
 | Recall by class (test n) | v1 | v2 | few-shot head | imprinting |
 |---|:-:|:-:|:-:|:-:|
@@ -212,6 +213,143 @@ The hand-made head, built from action units, is much better at angry and fear, w
 **6. The mouth is the least informative part of the face.** It is busy in happy, angry, fear, surprise and crying faces alike. In leave-one-out tests on the shots, class averages built from the mouth zone alone scored 17%, against 27–29% for the eye zones.
 
 **7. Naive Bayes made the most of the hand labels.** With the same detectors, a linear table counted from the labels scored 28.6% leave-one-out, while the naive-Bayes log-odds table scored 38.6%. The difference is that naive Bayes also counts the absence of an action as evidence.
+
+---
+
+## Classification reports
+
+These are per-class results on the 1,535-image test split, worked out from the confusion matrices in each experiment's `results_test.txt`. The **macro-average recall is the balanced accuracy** used throughout this README. Each report is followed by its confusion matrix, with the correct predictions on the diagonal in bold.
+
+| Model | Accuracy | Macro precision | Macro recall (balanced acc.) | Macro F1 | Weighted F1 |
+|---|:-:|:-:|:-:|:-:|:-:|
+| 1 · Hand-wired CNN | 0.18 | 0.25 | 0.19 | 0.13 | 0.21 |
+| 2 · ResNet-50 + typed head | 0.18 | 0.18 | 0.18 | 0.11 | 0.17 |
+| 3 · ResNet-50 + few-shot head | 0.24 | 0.29 | **0.34** | 0.22 | 0.26 |
+| ref · Weight imprinting | 0.27 | 0.26 | 0.33 | **0.25** | **0.29** |
+
+### Experiment 1: hand-wired CNN
+
+| | precision | recall | f1-score | support |
+|---|--:|--:|--:|--:|
+| angry | 0.03 | 0.02 | 0.03 | 81 |
+| disgust | 0.06 | 0.56 | 0.11 | 80 |
+| fear | 0.03 | 0.19 | 0.06 | 37 |
+| happy | 0.61 | 0.27 | 0.37 | 593 |
+| neutral | 0.46 | 0.06 | 0.10 | 340 |
+| sad | 0.33 | 0.03 | 0.05 | 239 |
+| surprise | 0.22 | 0.24 | 0.23 | 165 |
+| **accuracy** | | | **0.18** | 1,535 |
+| macro avg | 0.25 | **0.19** | 0.13 | 1,535 |
+| weighted avg | 0.42 | 0.18 | 0.21 | 1,535 |
+
+<details>
+<summary>Confusion matrix</summary>
+
+| true ↓ / predicted → | angry | disgust | fear | happy | neutral | sad | surprise |
+|---|--:|--:|--:|--:|--:|--:|--:|
+| **angry** | **2** | 60 | 3 | 12 | 1 | 0 | 3 |
+| **disgust** | 6 | **45** | 11 | 6 | 2 | 4 | 6 |
+| **fear** | 2 | 17 | **7** | 7 | 0 | 0 | 4 |
+| **happy** | 21 | 291 | 56 | **160** | 6 | 2 | 57 |
+| **neutral** | 30 | 136 | 84 | 32 | **19** | 5 | 34 |
+| **sad** | 11 | 123 | 25 | 30 | 11 | **6** | 33 |
+| **surprise** | 4 | 74 | 29 | 16 | 2 | 1 | **39** |
+| *predicted total* | *76* | *746* | *215* | *263* | *41* | *18* | *176* |
+
+</details>
+
+### Experiment 2: ResNet-50 + typed head
+
+| | precision | recall | f1-score | support |
+|---|--:|--:|--:|--:|
+| angry | 0.25 | 0.01 | 0.02 | 81 |
+| disgust | 0.07 | 0.15 | 0.09 | 80 |
+| fear | 0.04 | 0.30 | 0.07 | 37 |
+| happy | 0.42 | 0.26 | 0.32 | 593 |
+| neutral | 0.14 | 0.01 | 0.01 | 340 |
+| sad | 0.20 | 0.05 | 0.07 | 239 |
+| surprise | 0.12 | 0.49 | 0.20 | 165 |
+| **accuracy** | | | **0.18** | 1,535 |
+| macro avg | 0.18 | **0.18** | 0.11 | 1,535 |
+| weighted avg | 0.25 | 0.18 | 0.17 | 1,535 |
+
+<details>
+<summary>Confusion matrix</summary>
+
+| true ↓ / predicted → | angry | disgust | fear | happy | neutral | sad | surprise |
+|---|--:|--:|--:|--:|--:|--:|--:|
+| **angry** | **1** | 10 | 17 | 22 | 1 | 6 | 24 |
+| **disgust** | 0 | **12** | 12 | 19 | 0 | 2 | 35 |
+| **fear** | 0 | 1 | **11** | 14 | 0 | 2 | 9 |
+| **happy** | 2 | 49 | 144 | **155** | 7 | 13 | 223 |
+| **neutral** | 1 | 44 | 37 | 67 | **2** | 15 | 174 |
+| **sad** | 0 | 41 | 23 | 55 | 2 | **11** | 107 |
+| **surprise** | 0 | 18 | 18 | 40 | 2 | 6 | **81** |
+| *predicted total* | *4* | *175* | *262* | *372* | *14* | *55* | *653* |
+
+</details>
+
+### Experiment 3: ResNet-50 + few-shot head
+
+| | precision | recall | f1-score | support |
+|---|--:|--:|--:|--:|
+| angry | 0.25 | 0.47 | 0.32 | 81 |
+| disgust | 0.11 | 0.55 | 0.18 | 80 |
+| fear | 0.07 | 0.62 | 0.13 | 37 |
+| happy | 0.87 | 0.28 | 0.42 | 593 |
+| neutral | 0.33 | 0.04 | 0.06 | 340 |
+| sad | 0.25 | 0.18 | 0.21 | 239 |
+| surprise | 0.18 | 0.27 | 0.21 | 165 |
+| **accuracy** | | | **0.24** | 1,535 |
+| macro avg | 0.29 | **0.34** | 0.22 | 1,535 |
+| weighted avg | 0.49 | 0.24 | 0.26 | 1,535 |
+
+<details>
+<summary>Confusion matrix</summary>
+
+| true ↓ / predicted → | angry | disgust | fear | happy | neutral | sad | surprise |
+|---|--:|--:|--:|--:|--:|--:|--:|
+| **angry** | **38** | 11 | 16 | 2 | 0 | 12 | 2 |
+| **disgust** | 8 | **44** | 7 | 5 | 1 | 8 | 7 |
+| **fear** | 2 | 1 | **23** | 1 | 0 | 6 | 4 |
+| **happy** | 58 | 105 | 135 | **166** | 15 | 60 | 54 |
+| **neutral** | 4 | 164 | 26 | 5 | **12** | 30 | 99 |
+| **sad** | 38 | 76 | 28 | 11 | 4 | **43** | 39 |
+| **surprise** | 6 | 16 | 83 | 1 | 4 | 11 | **44** |
+| *predicted total* | *154* | *417* | *318* | *191* | *36* | *170* | *249* |
+
+</details>
+
+### Reference: weight imprinting (same 70 shots)
+
+| | precision | recall | f1-score | support |
+|---|--:|--:|--:|--:|
+| angry | 0.25 | 0.32 | 0.28 | 81 |
+| disgust | 0.12 | 0.56 | 0.20 | 80 |
+| fear | 0.12 | 0.46 | 0.20 | 37 |
+| happy | 0.55 | 0.31 | 0.40 | 593 |
+| neutral | 0.34 | 0.11 | 0.17 | 340 |
+| sad | 0.25 | 0.22 | 0.23 | 239 |
+| surprise | 0.21 | 0.33 | 0.26 | 165 |
+| **accuracy** | | | **0.27** | 1,535 |
+| macro avg | 0.26 | **0.33** | 0.25 | 1,535 |
+| weighted avg | 0.37 | 0.27 | 0.29 | 1,535 |
+
+<details>
+<summary>Confusion matrix</summary>
+
+| true ↓ / predicted → | angry | disgust | fear | happy | neutral | sad | surprise |
+|---|--:|--:|--:|--:|--:|--:|--:|
+| **angry** | **26** | 19 | 4 | 10 | 7 | 5 | 10 |
+| **disgust** | 3 | **45** | 6 | 13 | 6 | 3 | 4 |
+| **fear** | 1 | 2 | **17** | 3 | 1 | 7 | 6 |
+| **happy** | 41 | 143 | 39 | **186** | 41 | 62 | 81 |
+| **neutral** | 10 | 100 | 24 | 68 | **38** | 62 | 38 |
+| **sad** | 14 | 54 | 18 | 25 | 12 | **52** | 64 |
+| **surprise** | 7 | 15 | 29 | 32 | 8 | 20 | **54** |
+| *predicted total* | *102* | *378* | *137* | *337* | *113* | *211* | *257* |
+
+</details>
 
 ---
 
