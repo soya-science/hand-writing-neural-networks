@@ -1,0 +1,13 @@
+Hand-wired CNN on /Users/seyamomar/Desktop/handwriting-neural-nets/dataset/test
+  images 1535   accuracy 18.1%   balanced accuracy 19.5%
+  baselines: chance balanced accuracy 14.3%; always 'happy' accuracy 38.6%
+
+  rows = true, cols = predicted
+              angry disgust    fear   happy neutral     sad surpris   recall  precision
+  angry           2      60       3      12       1       0       3     2.5%      2.6%
+  disgust         6      45      11       6       2       4       6    56.2%      6.0%
+  fear            2      17       7       7       0       0       4    18.9%      3.3%
+  happy          21     291      56     160       6       2      57    27.0%     60.8%
+  neutral        30     136      84      32      19       5      34     5.6%     46.3%
+  sad            11     123      25      30      11       6      33     2.5%     33.3%
+  surprise        4      74      29      16       2       1      39    23.6%     22.2%

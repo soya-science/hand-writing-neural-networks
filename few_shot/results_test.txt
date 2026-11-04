@@ -1,0 +1,39 @@
+Few-shot head (10 shots per class) on /Users/seyamomar/Desktop/handwriting-neural-nets/dataset/test
+  images 1535   accuracy 24.1%   balanced accuracy 34.3%
+  baselines: chance balanced accuracy 14.3%; always 'happy' accuracy 38.6%
+
+  rows = true, cols = predicted
+              angry disgust    fear   happy neutral     sad surpris   recall  precision
+  angry          38      11      16       2       0      12       2    46.9%     24.7%
+  disgust         8      44       7       5       1       8       7    55.0%     10.6%
+  fear            2       1      23       1       0       6       4    62.2%      7.2%
+  happy          58     105     135     166      15      60      54    28.0%     86.9%
+  neutral         4     164      26       5      12      30      99     3.5%     33.3%
+  sad            38      76      28      11       4      43      39    18.0%     25.3%
+  surprise        6      16      83       1       4      11      44    26.7%     17.7%
+
+  mean AU per true class
+                      angry disgust    fear   happy neutral     sad surpris
+  brows_raised         0.23    0.26    0.58    0.32    0.36    0.36    0.51
+  brows_lowered        0.60    0.44    0.28    0.23    0.25    0.28    0.16
+  eyes_wide            0.23    0.21    0.69    0.32    0.39    0.21    0.68
+  eyes_squeezed        0.56    0.56    0.22    0.45    0.38    0.63    0.17
+  sneer                0.54    0.33    0.19    0.18    0.21    0.26    0.23
+  lip_corners_up       0.17    0.27    0.19    0.51    0.24    0.21    0.10
+  lip_corners_down     0.15    0.44    0.10    0.23    0.56    0.33    0.21
+  mouth_open           0.73    0.22    0.69    0.38    0.17    0.37    0.57
+  teeth                0.60    0.23    0.59    0.53    0.10    0.31    0.40
+
+Reference: weight imprinting from the same 70 shots
+  images 1535   accuracy 27.2%   balanced accuracy 33.0%
+  baselines: chance balanced accuracy 14.3%; always 'happy' accuracy 38.6%
+
+  rows = true, cols = predicted
+              angry disgust    fear   happy neutral     sad surpris   recall  precision
+  angry          26      19       4      10       7       5      10    32.1%     25.5%
+  disgust         3      45       6      13       6       3       4    56.2%     11.9%
+  fear            1       2      17       3       1       7       6    45.9%     12.4%
+  happy          41     143      39     186      41      62      81    31.4%     55.2%
+  neutral        10     100      24      68      38      62      38    11.2%     33.6%
+  sad            14      54      18      25      12      52      64    21.8%     24.6%
+  surprise        7      15      29      32       8      20      54    32.7%     21.0%

@@ -1,0 +1,84 @@
+
+  AU evidence, action on minus rest (standard); rows: action, cols: AU
+                    brow_ra brows_i brow_lo eyes_wi eyes_na nose_wr upper_l lip_cor lip_cor mouth_o   teeth
+  brow_raise           1.08   -0.53   -0.03   -0.48   -0.26   -0.01    0.00   -0.00    0.00   -0.00   -0.00
+  brows_inner_up      -0.08    1.05   -0.01   -0.18   -0.01   -0.01   -0.00    0.00    0.00   -0.00    0.00
+  brow_lower          -0.43   -0.42    1.07   -0.64   -0.46    0.04   -0.00    0.00    0.02   -0.01   -0.01
+  eyes_wide           -0.09   -0.10   -0.01    1.19   -0.63   -0.00   -0.01   -0.02   -0.01   -0.00    0.00
+  eyes_narrow         -0.09    0.07    0.01   -0.54    1.03   -0.00    0.01    0.02    0.01    0.01    0.00
+  nose_wrinkle        -0.03   -0.04    0.08   -0.05    0.01    1.04   -0.14   -0.02   -0.01   -0.08   -0.01
+  upper_lip_raise     -0.00   -0.00   -0.01    0.00   -0.00    0.01    1.05   -0.56   -0.01    0.46   -0.09
+  lip_corners_up       0.00    0.00   -0.00   -0.01   -0.01   -0.05   -0.04    1.16   -0.33   -0.21   -0.18
+  lip_corners_down    -0.00    0.00   -0.00    0.00    0.00   -0.00   -0.02   -0.05    1.00   -0.04   -0.14
+  mouth_open           0.00    0.01    0.00    0.01    0.00   -0.01   -0.11   -0.45   -0.18    1.07   -0.48
+  teeth               -0.00    0.00   -0.00   -0.00    0.00   -0.00   -0.04   -0.34   -0.28    0.33    0.93
+
+Head on cartoon emotion faces (standard)
+  images 420   accuracy 90.2%   balanced accuracy 90.2%
+  baselines: chance balanced accuracy 14.3%; always 'angry' accuracy 14.3%
+
+  rows = true, cols = predicted
+              angry disgust    fear   happy neutral     sad surpris   recall  precision
+  angry          57       0       0       2       0       1       0    95.0%     80.3%
+  disgust         0      60       0       0       0       0       0   100.0%     96.8%
+  fear           12       0      48       0       0       0       0    80.0%     88.9%
+  happy           1       1       0      56       2       0       0    93.3%     87.5%
+  neutral         1       1       5       6      39       8       0    65.0%     95.1%
+  sad             0       0       0       0       0      60       0   100.0%     87.0%
+  surprise        0       0       1       0       0       0      59    98.3%    100.0%
+
+  mean AU per true class
+                      angry disgust    fear   happy neutral     sad surpris
+  brow_raise           0.00    0.00    0.02    0.00    0.01    0.00    0.96
+  brows_inner_up       0.02    0.00    0.29    0.03    0.02    0.77    0.00
+  brow_lower           0.87    0.00    0.86    0.00    0.00    0.00    0.00
+  eyes_wide            0.00    0.00    0.77    0.00    0.07    0.00    0.68
+  eyes_narrow          0.00    0.11    0.00    0.59    0.12    0.15    0.00
+  nose_wrinkle         0.00    0.97    0.00    0.00    0.00    0.00    0.00
+  upper_lip_raise      0.00    0.00    0.00    0.01    0.01    0.00    0.00
+  lip_corners_up       0.02    0.00    0.00    0.56    0.03    0.00    0.00
+  lip_corners_down     0.05    0.29    0.06    0.06    0.07    0.94    0.03
+  mouth_open           0.00    0.04    0.01    0.00    0.00    0.00    0.71
+  teeth                0.30    0.73    0.80    0.56    0.02    0.00    0.00
+
+  AU evidence, action on minus rest (rough); rows: action, cols: AU
+                    brow_ra brows_i brow_lo eyes_wi eyes_na nose_wr upper_l lip_cor lip_cor mouth_o   teeth
+  brow_raise           0.87   -0.41   -0.04   -0.13   -0.22   -0.00   -0.00   -0.00    0.00   -0.00   -0.00
+  brows_inner_up       0.01    0.98    0.00   -0.04    0.11   -0.01   -0.00   -0.00    0.00   -0.00   -0.00
+  brow_lower          -0.37   -0.42    1.05   -0.45   -0.42    0.06   -0.01    0.01    0.04   -0.01   -0.01
+  eyes_wide           -0.11   -0.22   -0.02    0.94   -0.57   -0.00   -0.00   -0.03   -0.02   -0.00   -0.01
+  eyes_narrow         -0.07    0.10    0.01   -0.23    0.80   -0.00   -0.00    0.02    0.01    0.00    0.01
+  nose_wrinkle        -0.03   -0.08    0.29   -0.05    0.05    0.97   -0.12   -0.01    0.02   -0.06   -0.01
+  upper_lip_raise     -0.00   -0.00    0.00    0.00   -0.01    0.02    0.98   -0.46   -0.05    0.32   -0.07
+  lip_corners_up      -0.00    0.01   -0.00   -0.02    0.00   -0.03   -0.01    0.91   -0.28   -0.13   -0.07
+  lip_corners_down     0.00    0.00   -0.00   -0.01    0.00    0.00    0.06   -0.12    0.91   -0.00   -0.09
+  mouth_open           0.00   -0.01    0.00    0.01    0.00   -0.00    0.02   -0.32   -0.17    0.98   -0.25
+  teeth                0.00    0.00   -0.00   -0.01    0.01   -0.00   -0.02   -0.30   -0.21    0.23    0.99
+
+Head on cartoon emotion faces (rough)
+  images 420   accuracy 82.1%   balanced accuracy 82.1%
+  baselines: chance balanced accuracy 14.3%; always 'angry' accuracy 14.3%
+
+  rows = true, cols = predicted
+              angry disgust    fear   happy neutral     sad surpris   recall  precision
+  angry          54       2       0       0       4       0       0    90.0%     79.4%
+  disgust         2      47       0       3       7       1       0    78.3%     90.4%
+  fear            8       0      45       3       2       2       0    75.0%     86.5%
+  happy           1       2       2      50       4       1       0    83.3%     86.2%
+  neutral         3       0       4       2      34      17       0    56.7%     63.0%
+  sad             0       1       1       0       3      55       0    91.7%     72.4%
+  surprise        0       0       0       0       0       0      60   100.0%    100.0%
+
+  mean AU per true class
+                      angry disgust    fear   happy neutral     sad surpris
+  brow_raise           0.00    0.00    0.07    0.01    0.01    0.01    0.86
+  brows_inner_up       0.01    0.02    0.26    0.06    0.10    0.69    0.00
+  brow_lower           0.82    0.15    0.43    0.00    0.00    0.00    0.00
+  eyes_wide            0.00    0.00    0.73    0.00    0.05    0.02    0.60
+  eyes_narrow          0.06    0.10    0.00    0.67    0.12    0.33    0.00
+  nose_wrinkle         0.00    0.69    0.00    0.00    0.00    0.00    0.00
+  upper_lip_raise      0.03    0.05    0.01    0.00    0.00    0.05    0.00
+  lip_corners_up       0.04    0.00    0.00    0.46    0.02    0.00    0.00
+  lip_corners_down     0.03    0.21    0.07    0.08    0.09    0.66    0.04
+  mouth_open           0.01    0.01    0.02    0.00    0.00    0.00    0.75
+  teeth                0.27    0.63    0.67    0.49    0.00    0.01    0.01
